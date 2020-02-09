@@ -34,7 +34,7 @@ If I have more knowledge and time, I probably give more attention to cancel and 
 In the directory of your choice, run:
 
 ```bash
-git clone https://github.com/arthurgrigoletto/ebay-subscriptions.git
+git clone https://github.com/arthurgrigoletto/ebay-subscription.git
 ```
 
 This command will clone the project locally.
