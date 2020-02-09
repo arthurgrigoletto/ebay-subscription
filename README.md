@@ -7,7 +7,7 @@ Create an application to manage alerts for products price on Ebay.com, an user s
 
 I decided to use some libraries as bull, bull-board and nodemailer because I found it easies and faster to use. I chose sucrase to compile the code because it's a lot faster than others, finally a chose not use typescript because it would cost more effort to implement aRequirementsnd use with libraries that I don't have much expertise.
 
-If I have more knowledge and time, I probably give more attention to cancel and update a job, unit and integration tests, use some tool to document better the API and study more about monorepo.
+If I have more knowledge and time, I probably give more attention to cancel and update a job, unit and integration tests, use some tool to document better the API, make frontend application and study more about monorepo.
 
 *To see if the emails are send correctly access http://localhost:8025 - This open MailHog Interface after containers is up*
 
@@ -67,7 +67,7 @@ MONGO_DB=rankmyapp
 
 REDIS_PASS=ebaysubscription
 
-EBAY_CLIENT_ID=
+EBAY_CLIENT_ID=<YOUR_KEY_HERE>
 ```
 
 After this run on terminal:
