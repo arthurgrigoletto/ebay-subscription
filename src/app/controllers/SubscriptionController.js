@@ -1,4 +1,6 @@
 import Cache from '../../lib/Cache';
+import Queue from '../../lib/Queue';
+import SubscriptionMail from '../jobs/SubscriptionMail';
 import Subscription from '../schemas/Subscription';
 
 class SubscriptionController {
@@ -69,9 +71,16 @@ class SubscriptionController {
         keywords,
       });
 
-      /**
-       * Send Emails
-       */
+      await Queue.add(
+        SubscriptionMail.key,
+        { email, keywords },
+        {
+          jobId: `${subscription.id}:${keywords}:${email}`,
+          repeat: {
+            cron: `*/${interval} * * * *`,
+          },
+        }
+      );
 
       /**
        * Invalidate Cache
@@ -114,6 +123,12 @@ class SubscriptionController {
       /**
        * Update job
        */
+      await Queue.update(SubscriptionMail.key, req.params.id, subscription, {
+        jobId: `${subscription.id}:${newKeywords}:${newEmail}`,
+        repeat: {
+          cron: `*/${newInterval} * * * *`,
+        },
+      });
 
       /**
        * Invalidate Cache
@@ -135,6 +150,7 @@ class SubscriptionController {
       /**
        * Cancel job
        */
+      await Queue.remove(SubscriptionMail.key, req.params.id);
 
       /**
        * Invalidate Cache
