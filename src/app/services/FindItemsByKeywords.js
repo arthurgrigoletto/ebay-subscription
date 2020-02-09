@@ -27,7 +27,6 @@ class FindItemsByKeywords {
       id: item.itemId[0],
       title: item.title[0],
       url: item.viewItemURL[0],
-      // eslint-disable-next-line no-underscore-dangle
       price: item.sellingStatus[0].currentPrice[0].__value__,
     }));
 
