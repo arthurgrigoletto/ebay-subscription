@@ -1,0 +1,8 @@
+<strong>Olá </strong>
+<p>Trouxemos algumas atualizações para você:</p>
+{{#each products}}
+  <p>
+    <strong>{{this.title}}</strong> - {{this.price}} -
+    <a href={{this.url}}>Confira já!</a>
+  </p>
+{{/each}}
