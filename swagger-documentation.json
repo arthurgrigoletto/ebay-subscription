@@ -1,0 +1,249 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Ebay Subscription",
+    "description": "Appplication to handle alerts on ebay's products",
+    "contact": {
+      "name": "Arthur Grigoletto",
+      "email": "arthur.grigoletto.lima@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333/",
+      "description": "Local Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Subscription Alerts"
+    }
+  ],
+  "paths": {
+    "/subscriptions": {
+      "get": {
+        "tags": ["Subscription Alerts"],
+        "description": "Get all Alerts",
+        "operationId": "getSubscriptions",
+        "parameters": [
+          {
+            "name": "interval",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "default": "desc"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subscriptions"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Subscription Alerts"],
+        "description": "Create an Alert",
+        "operationId": "storeSubscriptions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "teste@teste.com"
+                  },
+                  "keywords": {
+                    "type": "string",
+                    "example": "ipad"
+                  },
+                  "interval": {
+                    "type": "integer",
+                    "example": 2
+                  }
+                },
+                "requided": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subscription"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{id}": {
+      "get": {
+        "tags": ["Subscription Alerts"],
+        "description": "Show an Alert",
+        "operationId": "showSubscriptions",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subscription"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Subscription Alerts"],
+        "description": "Update an Alert",
+        "operationId": "updateSubscriptions",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "teste@teste.com",
+                    "required": false
+                  },
+                  "keywords": {
+                    "type": "string",
+                    "example": "ipad",
+                    "required": false
+                  },
+                  "interval": {
+                    "type": "integer",
+                    "example": 2,
+                    "required": false
+                  }
+                },
+                "requided": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subscription"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Subscription Alerts"],
+        "description": "Delete an Alert",
+        "operationId": "deleteSubscriptions",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {}
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Subscription": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "5e40294fad2c670035656f2e"
+          },
+          "email": {
+            "type": "string",
+            "example": "teste@teste.com"
+          },
+          "keywords": {
+            "type": "string",
+            "example": "ipad"
+          },
+          "interval": {
+            "type": "integer",
+            "example": 2
+          },
+          "createdAt": {
+            "type": "Date",
+            "example": "2020-02-09T15:46:23.426Z"
+          },
+          "updatedAt": {
+            "type": "Date",
+            "example": "2020-02-09T15:46:23.426Z"
+          }
+        }
+      },
+      "Subscriptions": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Subscription"
+        }
+      }
+    }
+  }
+}

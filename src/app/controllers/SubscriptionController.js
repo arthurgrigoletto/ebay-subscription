@@ -2,18 +2,29 @@ import Cache from '../../lib/Cache';
 import Queue from '../../lib/Queue';
 import SubscriptionMail from '../jobs/SubscriptionMail';
 import Subscription from '../schemas/Subscription';
+import { buildFiltersAndCachedKey } from '../utils/util';
 
 class SubscriptionController {
   async index(req, res) {
     try {
-      const cacheKey = `subscription`;
+      const { email, interval, orderBy = 'desc' } = req.query;
+
+      const { key, filters } = buildFiltersAndCachedKey({
+        email,
+        interval,
+      });
+
+      const cacheKey = `subscription:${orderBy}${key}`;
+
       const cached = await Cache.get(cacheKey);
 
       if (cached) {
         return res.json(cached);
       }
 
-      const subscriptions = await Subscription.find();
+      const subscriptions = await Subscription.find(filters).sort({
+        createdAt: orderBy,
+      });
 
       await Cache.set(cacheKey, subscriptions);
 
