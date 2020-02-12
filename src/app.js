@@ -1,8 +1,10 @@
 import BullBoard from 'bull-board';
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
 import Youch from 'youch';
 import 'express-async-errors';
 
+import swaggerDocs from '../swagger-documentation.json';
 import Queue from './lib/Queue';
 import routes from './routes';
 
@@ -22,6 +24,7 @@ class App {
 
   routes() {
     this.server.use('/admin/queues', BullBoard.UI);
+    this.server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
     this.server.use(routes);
   }
 
