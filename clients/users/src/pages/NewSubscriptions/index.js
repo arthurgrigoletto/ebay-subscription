@@ -1,7 +1,9 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
+import { addSubscriptionRequest } from '~/store/modules/subscription/actions';
 import { Container, Content } from './styles';
 
 const schema = Yup.object().shape({
@@ -10,13 +12,16 @@ const schema = Yup.object().shape({
     .required('Email is Required'),
   keywords: Yup.string().required('Keywords is required'),
   interval: Yup.number()
-    .oneOf([2, 10, 30])
+    .oneOf([2, 10, 30], 'Interval must be one of 2, 10 or 30')
     .required(),
 });
 
 export default function NewSubscriptions() {
-  function handleSubmit(data) {
-    console.tron.log(data);
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.subscription.loading);
+
+  function handleSubmit({ email, interval, keywords }) {
+    dispatch(addSubscriptionRequest({ email, interval, keywords }));
   }
 
   return (
@@ -35,7 +40,9 @@ export default function NewSubscriptions() {
             placeholder="Intervalo de Notificações"
           />
 
-          <button type="submit">Criar Alerta</button>
+          <button type="submit">
+            {loading ? 'Carregando...' : 'Criar Alerta'}
+          </button>
         </Form>
       </Content>
     </Container>

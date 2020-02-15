@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   height: 64px;
-  max-width: 1720px;
+  /* max-width: 1720px; */
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -18,8 +18,8 @@ export const Content = styled.div`
     align-items: center;
 
     img {
-      margin-right: 190px;
-      padding-right: 190px;
+      margin-right: 50px;
+      padding-right: 50px;
     }
 
     a {

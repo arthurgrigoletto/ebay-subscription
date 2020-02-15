@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { MdClose } from 'react-icons/md';
 
+import { removeSubscription } from '~/store/modules/subscription/actions';
 import api from '~/services/api';
 
-import { Container } from './styles';
+import { Container, Content, Subscription, Minutes, Keyword } from './styles';
 
 export default function Dashboard() {
+  const dispatch = useDispatch();
   const [subscriptions, setSubscriptions] = useState([]);
 
   useEffect(() => {
@@ -17,11 +21,32 @@ export default function Dashboard() {
     loadSubscriptions();
   }, []);
 
+  function handleRemove(id) {
+    dispatch(removeSubscription(id));
+  }
+
   return (
     <Container>
-      {subscriptions.map(s => (
-        <p>{s.email}</p>
-      ))}
+      <ul>
+        {subscriptions.map(s => (
+          <Content>
+            <Subscription key={s._id}>
+              <Minutes>
+                <strong>{s.interval}</strong>
+                <span>Minutos</span>
+              </Minutes>
+              <Keyword>
+                <span>Alerta sobre</span>
+                <strong>{s.keywords.toUpperCase()}</strong>
+              </Keyword>
+              <span>{s.email}</span>
+            </Subscription>
+            <button type="button" onClick={() => handleRemove(s._id)}>
+              <MdClose size={30} color="#bb2124" />
+            </button>
+          </Content>
+        ))}
+      </ul>
     </Container>
   );
 }
