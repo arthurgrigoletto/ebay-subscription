@@ -13,7 +13,7 @@ export default function Header() {
           <Link to="/">
             <img src={Logo} alt="RankMyApp" />
           </Link>
-          <Link to="/">Criar Alerta</Link>
+          <Link to="/new-subscription">Criar Alerta</Link>
         </nav>
       </Content>
     </Container>
