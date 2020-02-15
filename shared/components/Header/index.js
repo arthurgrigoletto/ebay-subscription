@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Container, Content } from './styles';
 
-import logo from '../../assets/logo.jpeg';
+import { Logo } from '@shared/assets';
 
 export default function Header() {
   return (
@@ -11,7 +11,7 @@ export default function Header() {
       <Content>
         <nav>
           <Link to="/">
-            <img src={logo} alt="RankMyApp" />
+            <img src={Logo} alt="RankMyApp" />
           </Link>
           <Link to="/">Criar Alerta</Link>
         </nav>
