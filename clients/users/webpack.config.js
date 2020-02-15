@@ -1,13 +1,15 @@
 const path = require('path');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: ['@babel/polyfill', path.resolve(__dirname, 'src', 'index.js')],
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),
+    historyApiFallback: true,
+    port: 3000,
   },
   module: {
     rules: [
