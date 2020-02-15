@@ -1,21 +1,27 @@
-export function addSubscriptionRequest(data) {
+export function addSubscriptionRequest({ email, keywords, interval }) {
   return {
     type: '@subscription/ADD_REQUEST',
-    data,
+    payload: { email, keywords, interval },
   };
 }
 
 export function addSubscriptionSuccess(alert) {
   return {
     type: '@subscription/ADD_SUCCESS',
-    alert,
+    payload: alert,
+  };
+}
+
+export function requestFailure() {
+  return {
+    type: '@subscription/REQUEST_FAILURE',
   };
 }
 
 export function removeSubscription(id) {
   return {
     type: '@subscription/REMOVE',
-    id,
+    payload: { id },
   };
 }
 

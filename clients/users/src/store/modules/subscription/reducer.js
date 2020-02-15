@@ -1,39 +1,40 @@
 import produce from 'immer';
 
-export default function subscription(state = [], action) {
-  switch (action.type) {
-    case '@subscription/GET_SUCCESS':
-      return produce(state, draft => {
-        const { subscriptions } = action;
+const INITIAL_STATE = {
+  data: [],
+  loading: false,
+};
 
-        subscriptions.forEach(s => draft.push(s));
-      });
-    case '@subscription/ADD_SUCCESS':
-      return produce(state, draft => {
-        const { alert } = action;
+export default function subscription(state = INITIAL_STATE, action) {
+  return produce(state, draft => {
+    switch (action.type) {
+      case '@subscription/ADD_REQUEST': {
+        draft.loading = true;
+        break;
+      }
+      case '@subscription/ADD_SUCCESS': {
+        const { alert } = action.payload;
 
-        draft.push(alert);
-      });
-    case '@subscription/REMOVE':
-      return produce(state, draft => {
-        const alertIndex = draft.findIndex(s => s.id === action.id);
+        draft.data.push(alert);
+        draft.loading = false;
+        break;
+      }
+      case '@subscription/REQUEST_FAILURE': {
+        draft.loading = false;
+        break;
+      }
+      case '@subscription/UPDATE_SUCCESS': {
+        const alertIndex = draft.data.findIndex(s => s.id === action.id);
 
         if (alertIndex >= 0) {
-          draft.splice(alertIndex, 1);
-        }
-      });
-    case '@subscription/UPDATE_SUCCESS':
-      return produce(state, draft => {
-        const alertIndex = draft.findIndex(s => s.id === action.id);
-
-        if (alertIndex >= 0) {
-          draft[alertIndex] = {
-            ...draft[alertIndex],
+          draft.data[alertIndex] = {
+            ...draft.data[alertIndex],
             ...action.subscription,
           };
         }
-      });
-    default:
-      return state;
-  }
+        break;
+      }
+      default:
+    }
+  });
 }
