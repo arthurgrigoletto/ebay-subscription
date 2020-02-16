@@ -23,10 +23,20 @@ If I have more knowledge and time, I probably give more attention to cancel and 
 - [ ] Implementing Tests
 - [x] Run the whole project with docker-compose
 
-## How to run the backend
+## How to run
 
-You can see all Backend Documentantion [here]();
+In the directory of your choice, run:
 
-## How to run the Frontend
+```bash
+  git clone https://github.com/arthurgrigoletto/ebay-subscription.git
+```
 
-You can see all FrontEnd Documentantion [here]();
+This command will clone the project locally.
+
+### Backend
+
+You can see all Backend Documentantion [here](https://github.com/arthurgrigoletto/ebay-subscription/blob/master/docs/BACKEND.md);
+
+## Frontend
+
+You can see all FrontEnd Documentantion [here](https://github.com/arthurgrigoletto/ebay-subscription/blob/master/docs/FRONTEND.md);

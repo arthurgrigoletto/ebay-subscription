@@ -15,6 +15,7 @@
 | **DELETE**`/subscriptions`    | Delete a subscription                  | Public  |
 | ----------- | ---------------------------- | ------- |
 | **GET** `/admin/queues`         | List Status Background jobs | Public |
+| **GET** `/api-docs`      |  Swagger Documentation          | Public |                  | Public  |
 | **GET** `:8025`      |  MailHog interface          | Public |                  | Public  |
 
 ## Getting Started
@@ -26,27 +27,19 @@
 
 ### How to run
 
-In the directory of your choice, run:
-
-```bash
-git clone https://github.com/arthurgrigoletto/ebay-subscription.git
-```
-
-This command will clone the project locally.
-
 In the project directory, run:
 
 ```bash
-  yarn
+  cd server
 
-  or
+  and
 
-  npm install
+  yarn or npm install
 ```
 
 This command will install all dependencies will be need to run the project.
 
-Create your .env file on the project root folder, like the `.env.example`, and put on EBAY_CLIENT_ID your key from ebay developer
+Create your .env file on the project root server folder, like the `.env.example`, and put on EBAY_CLIENT_ID your key from ebay developer
 
 ```env
 
@@ -65,7 +58,7 @@ REDIS_PASS=ebaysubscription
 EBAY_CLIENT_ID=<YOUR_KEY_HERE>
 ```
 
-After this run on terminal:
+After this, on server folder, run:
 
 ```bash
   docker-compose up -d --build
