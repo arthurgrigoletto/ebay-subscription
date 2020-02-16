@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 
 import '~/config/ReactotronConfig';
 
-import { Header } from '@shared/components';
+import Header from '~/components/Header';
 import Routes from '~/routes';
 
 import GlobalStyle from '~/styles/global';

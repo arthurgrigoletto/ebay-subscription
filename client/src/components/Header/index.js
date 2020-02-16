@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Container, Content } from './styles';
 
-import { Logo } from '@shared/assets';
+import Logo from '~/assets/logo.jpeg';
 
 export default function Header() {
   return (

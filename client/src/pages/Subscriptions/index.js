@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { MdClose } from 'react-icons/md';
 
 import { removeSubscription } from '~/store/modules/subscription/actions';
 import api from '~/services/api';
 
-import { Container, Content, Subscription, Minutes, Keyword } from './styles';
+import {
+  Container,
+  Content,
+  Subscription,
+  Minutes,
+  Keyword,
+  EmptyBox,
+} from './styles';
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -28,6 +36,12 @@ export default function Dashboard() {
   return (
     <Container>
       <ul>
+        {!subscriptions.length && (
+          <EmptyBox>
+            <h1>Nenhum alerta cadastrado</h1>
+            <Link to="new-subscription">Cadastre já!</Link>
+          </EmptyBox>
+        )}
         {subscriptions.map(s => (
           <Content>
             <Subscription key={s._id}>
