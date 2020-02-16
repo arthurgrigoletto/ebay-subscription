@@ -1,5 +1,5 @@
 {
-  "name": "@clients/users",
+  "name": "ebay-subscription-client",
   "version": "1.0.0",
   "private": true,
   "scripts": {
