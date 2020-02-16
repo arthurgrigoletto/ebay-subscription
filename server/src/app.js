@@ -1,4 +1,5 @@
 import BullBoard from 'bull-board';
+import cors from 'cors';
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import Youch from 'youch';
@@ -20,6 +21,11 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
+    this.server.use(
+      cors({
+        origin: process.env.FRONT_URL,
+      })
+    );
   }
 
   routes() {
