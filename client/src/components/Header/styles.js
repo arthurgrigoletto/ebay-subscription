@@ -24,6 +24,7 @@ export const Content = styled.div`
 
     a {
       letter-spacing: 1px;
+      margin: 15px;
       font-weight: 500;
       color: #222;
     }
